@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Infrastructure overlay for environment-specific configuration
+# This is referenced by ArgoCD Application: hcp-infrastructure
+
+bases:
+  - ../../components/infrastructure
+
+# Patch configurations for your environment
+patches:
+  # Storage device configuration
+  - target:
+      kind: LVMCluster
+      name: lvmcluster
+    patch: |-
+      - op: replace
+        path: /spec/storage/deviceClasses/0/deviceSelector/paths/0
+        value: /dev/sdb  # CHANGE THIS: Update to your disk device
+
+  # MetalLB IP address pool
+  - target:
+      kind: IPAddressPool
+      name: main-pool
+    patch: |-
+      - op: replace
+        path: /spec/addresses/0
+        value: 192.168.1.200-192.168.1.210  # CHANGE THIS: Update to your IP range

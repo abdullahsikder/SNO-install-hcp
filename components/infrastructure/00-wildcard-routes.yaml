@@ -1,0 +1,14 @@
+---
+# Sync Wave: -1
+# Description: Enable wildcard DNS routes (required for HCP)
+# This is needed for hosted cluster ingress to work properly
+apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  name: default
+  namespace: openshift-ingress-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  routeAdmission:
+    wildcardPolicy: WildcardsAllowed

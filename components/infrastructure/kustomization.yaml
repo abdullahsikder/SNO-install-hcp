@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - 00-wildcard-routes.yaml
+  - 0-hcp_namespaces.yaml
+  - 01-kubelet-config.yaml
+  - 02-lvm-storage-operator.yaml
+  - 03-lvmcluster.yaml
+  - 04-openshift-virtualization-operator.yaml
+  - 05-hyperconverged.yaml
+  - 06-storage-profile.yaml
+  - 07-metallb-operator.yaml
+  - 08-metallb-config.yaml
+  - 09-multicluster-engine-operator.yaml
+  - 10-multicluster-engine.yaml
+
+# Common labels for infrastructure components
+commonLabels:
+  app.kubernetes.io/part-of: hcp-infrastructure
+  app.kubernetes.io/managed-by: argocd

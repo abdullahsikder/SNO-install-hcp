@@ -1,0 +1,28 @@
+---
+# Sync Wave: 3
+# Description: Create LVM cluster for storage provisioning
+# IMPORTANT: Update the deviceSelector.paths to match your available disk
+# Use: oc debug node/<node-name> -- chroot /host lsblk
+apiVersion: lvm.topolvm.io/v1alpha1
+kind: LVMCluster
+metadata:
+  name: lvmcluster
+  namespace: openshift-storage
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  storage:
+    deviceClasses:
+    - name: vg1
+      default: true
+      deviceSelector:
+        paths:
+        - /dev/sdb  # CHANGE THIS to your available disk device
+      fstype: xfs
+      thinPoolConfig:
+        name: thin-pool-1
+        sizePercent: 90
+        overprovisionRatio: 10
+        chunkSizeCalculationPolicy: Static
+        metadataSizeCalculationPolicy: Host

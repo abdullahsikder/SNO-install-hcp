@@ -1,0 +1,17 @@
+---
+# Sync Wave: 1
+# Description: Increase pod limits on SNO node to accommodate HCP VMs
+# Note: This will cause the node to reboot and take 10-15 minutes
+apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  name: increase-pod-limit
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  machineConfigPoolSelector:
+    matchLabels:
+      pools.operator.machineconfiguration.openshift.io/master: ""
+  kubeletConfig:
+    maxPods: 1000

@@ -1,0 +1,13 @@
+---
+# Sync Wave: 5
+# Description: Create HyperConverged instance to initialize OpenShift Virtualization
+apiVersion: hco.kubevirt.io/v1beta1
+kind: HyperConverged
+metadata:
+  name: kubevirt-hyperconverged
+  namespace: openshift-cnv
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  BareMetalPlatform: true

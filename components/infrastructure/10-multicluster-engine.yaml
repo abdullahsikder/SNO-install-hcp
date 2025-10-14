@@ -1,0 +1,18 @@
+---
+# Sync Wave: 10
+# Description: Create MultiClusterEngine instance with HCP enabled
+apiVersion: multicluster.openshift.io/v1
+kind: MultiClusterEngine
+metadata:
+  name: multiclusterengine
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  availabilityConfig: Basic
+  overrides:
+    components:
+    - name: hypershift
+      enabled: true
+    - name: hypershift-local-hosting
+      enabled: true

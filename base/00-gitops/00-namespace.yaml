@@ -1,0 +1,9 @@
+---
+# Sync Wave: -10
+# Description: Create OpenShift GitOps namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openshift-gitops-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"

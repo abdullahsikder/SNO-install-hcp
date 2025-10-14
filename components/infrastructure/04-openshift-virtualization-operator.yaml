@@ -1,0 +1,27 @@
+---
+# Sync Wave: 4
+# Description: Install OpenShift Virtualization (KubeVirt) for VM hosting
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: kubevirt-hyperconverged-group
+  namespace: openshift-cnv
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  targetNamespaces:
+  - openshift-cnv
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: hco-operatorhub
+  namespace: openshift-cnv
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  channel: stable
+  name: kubevirt-hyperconverged
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  installPlanApproval: Automatic

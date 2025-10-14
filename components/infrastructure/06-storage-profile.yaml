@@ -1,0 +1,16 @@
+---
+# Sync Wave: 6
+# Description: Create StorageProfile for CDI to properly provision DataVolumes
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: StorageProfile
+metadata:
+  name: lvms-vg1
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  claimPropertySets:
+  - accessModes:
+    - ReadWriteOnce
+    volumeMode: Filesystem
+  cloneStrategy: snapshot

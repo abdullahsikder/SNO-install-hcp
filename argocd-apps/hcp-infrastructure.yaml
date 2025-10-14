@@ -1,0 +1,37 @@
+---
+# ArgoCD Application for HCP Infrastructure Components
+# This deploys: Storage, Virtualization, MetalLB, MCE
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hcp-infrastructure
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/YOUR_ORG/SNO-install-hcp.git  # CHANGE THIS
+    targetRevision: main
+    path: overlays/infrastructure
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: openshift-storage
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m
+  ignoreDifferences:
+    - group: operators.coreos.com
+      kind: Subscription
+      jsonPointers:
+        - /status
