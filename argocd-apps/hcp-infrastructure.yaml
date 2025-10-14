@@ -35,3 +35,11 @@ spec:
       kind: Subscription
       jsonPointers:
         - /status
+    - group: multicluster.openshift.io
+      kind: MultiClusterEngine
+      jsonPointers:
+        - /spec/overrides
+    - group: hco.kubevirt.io
+      kind: HyperConverged
+      jsonPointers:
+        - /spec/workloads
