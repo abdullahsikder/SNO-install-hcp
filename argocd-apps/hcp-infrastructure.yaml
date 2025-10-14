@@ -11,7 +11,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/YOUR_ORG/SNO-install-hcp.git  # CHANGE THIS
+    repoURL: https://github.com/abdullahsikder/SNO-install-hcp.git
     targetRevision: main
     path: overlays/infrastructure
   destination:

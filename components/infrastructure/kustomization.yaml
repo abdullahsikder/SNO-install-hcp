@@ -14,8 +14,3 @@ resources:
   - 08-metallb-config.yaml
   - 09-multicluster-engine-operator.yaml
   - 10-multicluster-engine.yaml
-
-# Common labels for infrastructure components
-commonLabels:
-  app.kubernetes.io/part-of: hcp-infrastructure
-  app.kubernetes.io/managed-by: argocd

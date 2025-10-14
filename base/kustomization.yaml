@@ -10,8 +10,5 @@ resources:
   - ../argocd-apps
 
 # Common metadata for bootstrap
-commonLabels:
-  app.kubernetes.io/managed-by: kustomize
-
 commonAnnotations:
   description: "HCP on SNO - GitOps Bootstrap"
