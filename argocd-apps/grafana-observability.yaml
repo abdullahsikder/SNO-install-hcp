@@ -1,0 +1,37 @@
+---
+# ArgoCD Application for Grafana Observability
+# This deploys: Grafana Operator, Grafana Instance, Prometheus DataSource, CPU Dashboard
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-observability
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/abdullahsikder/SNO-install-hcp.git
+    targetRevision: main
+    path: overlays/observability
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: grafana-operator
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m
+  ignoreDifferences:
+    - group: operators.coreos.com
+      kind: Subscription
+      jsonPointers:
+        - /status

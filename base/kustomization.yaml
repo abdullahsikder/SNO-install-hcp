@@ -8,7 +8,3 @@ kind: Kustomization
 resources:
   - 00-gitops
   - ../argocd-apps
-
-# Common metadata for bootstrap
-commonAnnotations:
-  description: "HCP on SNO - GitOps Bootstrap"
