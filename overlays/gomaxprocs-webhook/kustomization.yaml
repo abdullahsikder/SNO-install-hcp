@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# GOMAXPROCS Webhook for HCP Control Planes
+# This is referenced by ArgoCD Application: gomaxprocs-webhook
+# CONFIGURED FOR: hcp-3 only
+
+bases:
+  - ../../components/gomaxprocs-webhook
+
+# Patch to target ONLY hcp-3 namespace
+patches:
+  - target:
+      kind: MutatingWebhookConfiguration
+      name: gomaxprocs-webhook
+    patch: |-
+      - op: replace
+        path: /webhooks/0/namespaceSelector
+        value:
+          matchExpressions:
+          - key: hypershift.openshift.io/hosted-control-plane
+            operator: In
+            values: ["true"]
+          - key: kubernetes.io/metadata.name
+            operator: In
+            values: ["clusters-hcp-3"]

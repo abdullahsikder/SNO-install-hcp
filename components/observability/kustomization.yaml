@@ -6,3 +6,4 @@ resources:
   - 02-grafana-instance.yaml
   - 03-grafana-datasource.yaml
   - 04-cpu-dashboard.yaml
+  - 05-hcp-cpu-dashboard.yaml

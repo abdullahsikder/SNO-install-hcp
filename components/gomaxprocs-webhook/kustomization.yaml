@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: hypershift
+
+resources:
+  - 01-serviceaccount.yaml
+  - 02-role.yaml
+  - 03-rolebinding.yaml
+  - 04-service.yaml
+  - 05-deployment.yaml
+  - 06-mutatingwebhook.yaml
+
+# Create ConfigMap from config.yaml
+configMapGenerator:
+  - name: gomaxprocs-webhook
+    namespace: hypershift
+    files:
+      - config.yaml
+    options:
+      disableNameSuffixHash: true

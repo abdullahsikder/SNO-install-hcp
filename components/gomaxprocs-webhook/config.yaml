@@ -1,0 +1,57 @@
+# GOMAXPROCS Configuration for HCP Control Planes
+#
+# This configuration automatically sets GOMAXPROCS for Go-based control plane components
+# Use the Grafana "HCP CPU Monitoring" dashboard to tune these values based on:
+# - CPU throttling percentage (should be < 10%)
+# - CPU usage vs requests
+# - Actual performance metrics
+#
+# Tuning Guide:
+# - If throttling is HIGH (>25%): REDUCE GOMAXPROCS
+# - If throttling is LOW (<5%) and CPU usage is low: INCREASE GOMAXPROCS
+# - Monitor etcd and kube-apiserver closely as they're most critical
+
+# Default GOMAXPROCS for all control plane containers
+# Conservative starting point - tune based on your workload
+default: "4"
+
+# Per-component overrides
+# These are starting values - adjust based on Grafana metrics
+overrides:
+  # kube-apiserver: High QPS, benefits from more parallelism
+  - workloadKind: Deployment
+    workloadName: kube-apiserver
+    containerName: kube-apiserver
+    value: "8"
+
+  # etcd: I/O bound, moderate GOMAXPROCS recommended
+  - workloadKind: StatefulSet
+    workloadName: etcd
+    containerName: etcd
+    value: "6"
+
+  # kube-controller-manager: Moderate parallelism
+  - workloadKind: Deployment
+    workloadName: kube-controller-manager
+    containerName: kube-controller-manager
+    value: "6"
+
+  # kube-scheduler: Lighter workload
+  - workloadKind: Deployment
+    workloadName: kube-scheduler
+    containerName: kube-scheduler
+    value: "4"
+
+  # cluster-policy-controller
+  - workloadKind: Deployment
+    workloadName: cluster-policy-controller
+    containerName: cluster-policy-controller
+    value: "4"
+
+# Exclusions: containers that should NOT have GOMAXPROCS set
+# Add containers here if they manage GOMAXPROCS themselves
+exclusions:
+  # Example: Exclude init containers or specific jobs
+  - workloadKind: Job
+    workloadName: installer
+    containerName: "*"

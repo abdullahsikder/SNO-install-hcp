@@ -1,0 +1,37 @@
+---
+# ArgoCD Application for GOMAXPROCS Webhook
+# Automatically sets GOMAXPROCS for HCP control plane pods
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gomaxprocs-webhook
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/abdullahsikder/SNO-install-hcp.git
+    targetRevision: main
+    path: overlays/gomaxprocs-webhook
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hypershift
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jsonPointers:
+        - /webhooks/0/clientConfig/caBundle
