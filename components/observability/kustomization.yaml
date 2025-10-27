@@ -7,3 +7,4 @@ resources:
   - 03-grafana-datasource.yaml
   - 04-cpu-dashboard.yaml
   - 05-hcp-cpu-dashboard.yaml
+  - 06-hcp-comparison-dashboard.yaml
