@@ -35,6 +35,10 @@ spec:
       kind: Subscription
       jsonPointers:
         - /status
+    - group: operators.coreos.com
+      kind: OperatorGroup
+      jsonPointers:
+        - /metadata/labels
     - group: multicluster.openshift.io
       kind: MultiClusterEngine
       jsonPointers:
