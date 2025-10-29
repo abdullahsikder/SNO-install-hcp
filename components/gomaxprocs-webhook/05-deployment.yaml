@@ -19,8 +19,8 @@ spec:
       serviceAccountName: gomaxprocs-webhook
       containers:
       - name: webhook
-        image: quay.io/hypershift/gomaxprocs-webhook:latest
-        imagePullPolicy: Always
+        image: quay.io/redhat-user-workloads/crt-redhat-acm-tenant/hypershift-gomaxprocs-webhook@sha256:fed11f20067142b04318b0d5458f7939c5a552fb91485cb7735a42045a925dd8
+        imagePullPolicy: IfNotPresent
         args:
         - serve
         - --config-path=/etc/config/config.yaml
