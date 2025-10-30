@@ -41,7 +41,7 @@ spec:
           },
           "id": 100,
           "options": {
-            "content": "# HCP Cluster Comparison - GOMAXPROCS Testing\n\n**hcp-1**: No GOMAXPROCS | **hcp-2**: No GOMAXPROCS | **hcp-3**: GOMAXPROCS Enabled\n\nCompare CPU usage and throttling across clusters to validate GOMAXPROCS improvements.",
+            "content": "# HCP Cluster Comparison - GOMAXPROCS Testing.",
             "mode": "markdown"
           },
           "pluginVersion": "8.0.0",
@@ -116,7 +116,7 @@ spec:
           "targets": [
             {
               "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"clusters-hcp-1\", container!=\"\", container!=\"POD\"}[5m]))",
-              "legendFormat": "hcp-1 (no GOMAXPROCS)",
+              "legendFormat": "hcp-1 ",
               "refId": "A"
             }
           ],
@@ -191,7 +191,7 @@ spec:
           "targets": [
             {
               "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"clusters-hcp-2\", container!=\"\", container!=\"POD\"}[5m]))",
-              "legendFormat": "hcp-2 (no GOMAXPROCS)",
+              "legendFormat": "hcp-2 ",
               "refId": "A"
             }
           ],
@@ -266,11 +266,11 @@ spec:
           "targets": [
             {
               "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"clusters-hcp-3\", container!=\"\", container!=\"POD\"}[5m]))",
-              "legendFormat": "hcp-3 GOMAXPROCS",
+              "legendFormat": "hcp-3 ",
               "refId": "A"
             }
           ],
-          "title": "hcp-3 Total CPU Usage GOMAXPROCS",
+          "title": "hcp-3 Total CPU Usage ",
           "type": "timeseries"
         },
         {
@@ -525,7 +525,7 @@ spec:
               "refId": "A"
             }
           ],
-          "title": "hcp-3 CPU Throttling % GOMAXPROCS",
+          "title": "hcp-3 CPU Throttling % ",
           "type": "timeseries"
         },
         {
@@ -750,7 +750,7 @@ spec:
               "refId": "A"
             }
           ],
-          "title": "hcp-3 API Server & etcd CPU GOMAXPROCS",
+          "title": "hcp-3 API Server & etcd CPU",
           "type": "timeseries"
         },
         {
@@ -821,17 +821,17 @@ spec:
           "targets": [
             {
               "expr": "avg((rate(container_cpu_cfs_throttled_seconds_total{namespace=\"clusters-hcp-1\", container!=\"\", container!=\"POD\"}[5m]) / rate(container_cpu_cfs_periods_total{namespace=\"clusters-hcp-1\", container!=\"\", container!=\"POD\"}[5m])) * 100)",
-              "legendFormat": "hcp-1 (no GOMAXPROCS)",
+              "legendFormat": "hcp-1 ",
               "refId": "A"
             },
             {
               "expr": "avg((rate(container_cpu_cfs_throttled_seconds_total{namespace=\"clusters-hcp-2\", container!=\"\", container!=\"POD\"}[5m]) / rate(container_cpu_cfs_periods_total{namespace=\"clusters-hcp-2\", container!=\"\", container!=\"POD\"}[5m])) * 100)",
-              "legendFormat": "hcp-2 (no GOMAXPROCS)",
+              "legendFormat": "hcp-2 ",
               "refId": "B"
             },
             {
               "expr": "avg((rate(container_cpu_cfs_throttled_seconds_total{namespace=\"clusters-hcp-3\", container!=\"\", container!=\"POD\"}[5m]) / rate(container_cpu_cfs_periods_total{namespace=\"clusters-hcp-3\", container!=\"\", container!=\"POD\"}[5m])) * 100)",
-              "legendFormat": "hcp-3 GOMAXPROCS ENABLED",
+              "legendFormat": "hcp-3 ",
               "refId": "C"
             }
           ],
@@ -1006,7 +1006,7 @@ spec:
               "refId": "A"
             }
           ],
-          "title": "hcp-3 Current Throttle % GOMAXPROCS",
+          "title": "hcp-3 Current Throttle % ",
           "type": "gauge"
         }
       ],
