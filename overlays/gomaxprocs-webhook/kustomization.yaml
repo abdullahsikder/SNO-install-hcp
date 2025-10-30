@@ -24,3 +24,13 @@ patches:
           - key: kubernetes.io/metadata.name
             operator: In
             values: ["clusters-hcp-3"]
+      - op: replace
+        path: /webhooks/0/namespaceSelector
+        value:
+          matchExpressions:
+          - key: hypershift.openshift.io/hosted-control-plane
+            operator: In
+            values: ["true"]
+          - key: kubernetes.io/metadata.name
+            operator: In
+            values: ["clusters-hcp-2"]
