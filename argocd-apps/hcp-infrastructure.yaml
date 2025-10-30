@@ -43,3 +43,4 @@ spec:
       kind: HyperConverged
       jsonPointers:
         - /spec/workloads
+        - /spec/BareMetalPlatform
