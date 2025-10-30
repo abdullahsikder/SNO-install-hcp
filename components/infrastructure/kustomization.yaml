@@ -13,4 +13,4 @@ resources:
   - 07-metallb-operator.yaml
   - 08-metallb-config.yaml
   - 09-multicluster-engine-operator.yaml
-  - 10-multicluster-engine.yaml
+  # - 10-multicluster-engine.yaml
