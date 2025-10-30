@@ -3,3 +3,6 @@ kind: Kustomization
 
 resources:
   - hcp-infrastructure.yaml
+  - grafana-observability.yaml
+  - gomaxprocs-webhook.yaml
+
