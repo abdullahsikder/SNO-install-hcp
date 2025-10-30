@@ -8,8 +8,15 @@ This repository deploys the **infrastructure components** required for OpenShift
 # Login to your SNO cluster
 oc login --token=<your-token> --server=<your-server>
 
+
 # Deploy infrastructure components
 oc apply -k overlays/infrastructure
+
+OR Use GitOps method.
+<>Install GitOps Operator, then apply Application manifests.
+oc apply -f argocd-apps/kustomization.yaml
+
+To change the GoMaxProcs webhook, simply go to `overlays/gomaxprocs-webhook/kustomization.yaml` and change the patch section. 
 
 # Then create HCP clusters manually via the web console
 ```
