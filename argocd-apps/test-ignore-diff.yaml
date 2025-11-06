@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-ignore-diff
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-multiclusterhub
+  namespace: test-ignore-diff
+  labels:
+    test: ignore-diff
+data:
+  spec: |
+    availabilityConfig: High
+    overrides:
+      components:
+      - enabled: true
+        name: app-lifecycle
+      - enabled: true
+        name: cluster-lifecycle
+      - enabled: true
+        name: console
